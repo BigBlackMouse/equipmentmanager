@@ -1,6 +1,9 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.user.controller;
 
 
+import com.sicau.springbootequipmentmanager.equipmentmanager.common.result.PageResult;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.QueryEquipment;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -16,5 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/equipment")
 public class EquipmentController {
+    @GetMapping("/page")
+    public PageResult<?> getUserPage(QueryEquipment queryEquipment){
+        return null;
+    }
 
 }
