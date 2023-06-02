@@ -1,10 +1,10 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.shiro;
 
-import com.sicau.hls.springbootgraduationproject.common.component.JwtComponent;
-import com.sicau.hls.springbootgraduationproject.dto.EmployeeInfo;
-import com.sicau.hls.springbootgraduationproject.dto.EmployeePerms;
-import com.sicau.hls.springbootgraduationproject.user.entity.Employees;
-import com.sicau.hls.springbootgraduationproject.user.service.EmployeesService;
+import com.sicau.springbootequipmentmanager.equipmentmanager.common.component.JwtComponent;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.UserInfo;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.UserPerms;
+import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.User;
+import com.sicau.springbootequipmentmanager.equipmentmanager.user.service.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -20,13 +20,13 @@ import org.springframework.util.CollectionUtils;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+
 
 public class UserRealm extends AuthorizingRealm {
     @Autowired
     private JwtComponent jwtComponent;
     @Autowired
-    private EmployeesService employeesService;
+    private UserService userService;
 
     /**
      * 授权
@@ -35,23 +35,26 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        Employees employees = (Employees) principalCollection.getPrimaryPrincipal();
-        if (Objects.isNull(employees)){
+        User user = (User)principalCollection.getPrimaryPrincipal();
+        if (Objects.isNull(user)) {
             throw new AuthorizationException();
         }
-        int employeeId = employees.getEmployeeId();
-        if (Objects.isNull(employeeId)){
+        Integer userId = user.getUserId();
+
+        if (Objects.isNull(userId)) {
             throw new AuthorizationException();
         }
-        List<EmployeePerms> employeesList = employeesService.getEmployeePerms(employeeId);
-        if(CollectionUtils.isEmpty(employeesList)){
+        List<UserPerms> permsList = userService.getUserPerms(userId);
+        if (CollectionUtils.isEmpty(permsList)){
             throw new AuthorizationException();
         }
-        Set<String > perms = new HashSet<>();
-        Set<String > roles = new HashSet<>();
-        for (EmployeePerms employeePerms : employeesList) {
-            roles.add(employeePerms.getRoleCode());
-            perms.add(employeePerms.getPermsCode());
+
+        HashSet<String > perms = new HashSet<>();
+        HashSet<String > roles = new HashSet<>();
+
+        for(UserPerms userPerms:permsList){
+            roles.add(userPerms.getRoleCode());
+            perms.add(userPerms.getRoleCode());
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.addRoles(roles);
@@ -69,16 +72,16 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String token = authenticationToken.getPrincipal().toString();
         String userName = jwtComponent.getUserName(token);
-        EmployeeInfo employeeInfo = new EmployeeInfo();
-        employeeInfo.setEmployeeName(userName);
-        Employees employees = employeesService.getEmployeeInfo(employeeInfo);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserName(userName);
+        User user = userService.getUserInfo(userInfo);
 
-        if (Objects.isNull(employees)){
+        if (Objects.isNull(user)) {
             throw new AuthenticationException();
         }
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, token, this.getName());
 
-            SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(employees, token, this.getName());
-            return info;
+        return info;
 
 
     }

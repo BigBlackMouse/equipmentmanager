@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sicau.springbootequipmentmanager.equipmentmanager.user.mapper.EquipmentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Equipment">
+        <id column="equ_id" property="equId" />
+        <result column="fac_id" property="facId" />
+        <result column="equ_name" property="equName" />
+        <result column="equ_type" property="equType" />
+        <result column="equ_purchasedate" property="equPurchasedate" />
+        <result column="equ_purchaser" property="equPurchaser" />
+        <result column="equ_singleprice" property="equSingleprice" />
+        <result column="equ_unit" property="equUnit" />
+        <result column="equ_spec" property="equSpec" />
+        <result column="equ_total" property="equTotal" />
+        <result column="equ_curr" property="equCurr" />
+        <result column="equ_position" property="equPosition" />
+        <result column="del" property="del" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        equ_id, fac_id, equ_name, equ_type, equ_purchasedate, equ_purchaser, equ_singleprice, equ_unit, equ_spec, equ_total, equ_curr, equ_position, del
+    </sql>
+
+</mapper>

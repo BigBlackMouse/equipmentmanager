@@ -62,7 +62,7 @@ system:
 
 mybatis-plus:
   mapper-locations: classpath*:com/sicau/*/*/*/mapper/*Mapper.xml
-  type-aliases-package: com.sicau.*.springbootgraduationproject
+  type-aliases-package: com.sicau.*.equipmentmanager
   global-config:
     db-config:
       #主键类型 AUTO:"数据库ID自增" INPUT:"用户输入ID",ASSIGN_ID:"mybatisplus分配ID，Long，Integer，String", ASSIGN_UUID:"分配UUID，String";

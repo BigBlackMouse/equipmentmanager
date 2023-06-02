@@ -8,7 +8,6 @@ import org.apache.shiro.web.mgt.DefaultWebSessionStorageEvaluator;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import javax.servlet.Filter;
 import java.util.HashMap;
 
@@ -36,9 +35,8 @@ public class ShiroConfig {
         filter.put("jwt",new JwtFilter());
         factoryBean.setFilters(filter);
         HashMap<String , String > filterMap = new HashMap<>();
-        filterMap.put("/api/employee/getvcode","anon");
-        filterMap.put("/api/employee/login","anon");
-        filterMap.put("/api/employee/401","anon");
+        filterMap.put("/api/user/login","anon");
+        filterMap.put("/api/user/401","anon");
         filterMap.put("/**","jwt");
         factoryBean.setFilterChainDefinitionMap(filterMap);
         return factoryBean;

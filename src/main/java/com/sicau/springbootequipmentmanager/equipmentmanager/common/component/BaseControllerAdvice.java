@@ -1,6 +1,7 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.common.component;
 
-import com.sicau.hls.springbootgraduationproject.common.result.Result;
+
+import com.sicau.springbootequipmentmanager.equipmentmanager.common.result.Result;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
