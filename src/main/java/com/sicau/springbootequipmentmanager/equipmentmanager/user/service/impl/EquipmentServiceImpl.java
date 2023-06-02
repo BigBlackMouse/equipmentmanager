@@ -1,5 +1,9 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.EquipmentInfo;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.QueryEquipment;
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Equipment;
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.mapper.EquipmentMapper;
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.service.EquipmentService;
@@ -16,5 +20,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EquipmentServiceImpl extends ServiceImpl<EquipmentMapper, Equipment> implements EquipmentService {
-
+    @Override
+    public Page<Equipment> getEquipmentPage(QueryEquipment queryEquipment) {
+        Page<Equipment> page = new Page<>();
+        page.setSize(queryEquipment.getPageSize());
+        page.setCurrent(queryEquipment.getCurrentPage());
+        QueryWrapper<Equipment> wrapper = new QueryWrapper<>();
+        return page(page,wrapper);
+    }
 }

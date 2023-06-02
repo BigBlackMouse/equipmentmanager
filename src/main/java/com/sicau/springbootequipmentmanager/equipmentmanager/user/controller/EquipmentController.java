@@ -1,8 +1,12 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.user.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sicau.springbootequipmentmanager.equipmentmanager.common.result.PageResult;
 import com.sicau.springbootequipmentmanager.equipmentmanager.dto.QueryEquipment;
+import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Equipment;
+import com.sicau.springbootequipmentmanager.equipmentmanager.user.service.EquipmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,9 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/equipment")
 public class EquipmentController {
+    @Autowired
+    private EquipmentService equipmentService;
     @GetMapping("/page")
     public PageResult<?> getUserPage(QueryEquipment queryEquipment){
-        return null;
+        Page<Equipment> equipmentPage = equipmentService.getEquipmentPage(queryEquipment);
+        PageResult<Equipment> result = new PageResult<>(equipmentPage.getCurrent(),equipmentPage.getSize(),equipmentPage.getTotal(),equipmentPage.getPages(),equipmentPage.getRecords());
+        result.setCode(200);
+        result.setMsg("操作成功");
+        return result;
     }
 
 }
