@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sicau.springbootequipmentmanager.equipmentmanager.user.mapper.UsingrecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Usingrecord">
+        <id column="usi_id" property="usiId" />
+        <result column="user_id" property="userId" />
+        <result column="equ_id" property="equId" />
+        <result column="adm_id" property="admId" />
+        <result column="usi_reason" property="usiReason" />
+        <result column="usi_number" property="usiNumber" />
+        <result column="usi_date" property="usiDate" />
+        <result column="usi_returndate" property="usiReturndate" />
+        <result column="usi_applystatus" property="usiApplystatus" />
+        <result column="adm_feedbackapply" property="admFeedbackapply" />
+        <result column="usi_returnstatus" property="usiReturnstatus" />
+        <result column="adm_feedbackreturn" property="admFeedbackreturn" />
+        <result column="user_del" property="userDel" />
+        <result column="adm_del" property="admDel" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        usi_id, user_id, equ_id, adm_id, usi_reason, usi_number, usi_date, usi_returndate, usi_applystatus, adm_feedbackapply, usi_returnstatus, adm_feedbackreturn, user_del, adm_del
+    </sql>
+
+</mapper>

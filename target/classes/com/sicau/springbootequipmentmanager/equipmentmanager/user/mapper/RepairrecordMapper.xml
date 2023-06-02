@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sicau.springbootequipmentmanager.equipmentmanager.user.mapper.RepairrecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Repairrecord">
+        <id column="rep_id" property="repId" />
+        <result column="equ_id" property="equId" />
+        <result column="adm_id" property="admId" />
+        <result column="rep_reason" property="repReason" />
+        <result column="rep_person" property="repPerson" />
+        <result column="rep_cost" property="repCost" />
+        <result column="rep_date" property="repDate" />
+        <result column="rep_result" property="repResult" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        rep_id, equ_id, adm_id, rep_reason, rep_person, rep_cost, rep_date, rep_result
+    </sql>
+
+</mapper>
