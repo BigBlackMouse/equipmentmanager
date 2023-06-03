@@ -8,8 +8,8 @@ public class FeedBackInfo {
     private Integer userId;
     private String  feeQuestion;
     private String  feeDetail;
-    private String  adminMessage;
-    private String  adminAnswer;
+    private String  admMessage;
+    private String  admAnswer;
     private String  del;
 
 }

@@ -1,9 +1,7 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.user.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -41,6 +39,7 @@ public class Feedback implements Serializable {
     @TableField("adm_answer")
     private String admAnswer;
 
+    @TableLogic
     @TableField("del")
     private Integer del;
 

@@ -1,5 +1,8 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.user.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.FeedBackInfo;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.QueryFeedBack;
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Feedback;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +16,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface FeedbackService extends IService<Feedback> {
 
+    Page<Feedback> getFeedbackPage(QueryFeedBack queryFeedBack);
+
+    Boolean deleteFeedbackByFeeId(Integer feeId);
+
+    Boolean addFeedback(FeedBackInfo feedBackInfo);
+
+    Boolean updateFeedback(Feedback feedback);
 }

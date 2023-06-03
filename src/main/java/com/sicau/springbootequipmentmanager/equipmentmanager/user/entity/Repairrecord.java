@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -43,7 +45,7 @@ public class Repairrecord implements Serializable {
     private Float repCost;
 
     @TableField("rep_date")
-    private LocalDate repDate;
+    private Date repDate;
 
     @TableField("rep_result")
     private String repResult;

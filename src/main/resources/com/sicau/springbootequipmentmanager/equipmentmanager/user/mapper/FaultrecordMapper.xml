@@ -23,4 +23,10 @@
         fau_id, adm_id, equ_id, user_id, fau_occurdate, fau_occurposition, fau_detail, fau_img, adm_answer, adm_del, user_del, adm_message
     </sql>
 
+    <!--  用户级别逻辑删除  -->
+    <update id="userLogicDeleteByFauId" parameterType="Integer">
+        update faultrecord set user_del = 1 where fau_id = #{fauId}
+    </update>
+
+
 </mapper>

@@ -1,5 +1,7 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.user.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.QueryRepairRecord;
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Repairrecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RepairrecordService extends IService<Repairrecord> {
 
+    Page<Repairrecord> getRepairPage(QueryRepairRecord queryRepairRecord);
 }

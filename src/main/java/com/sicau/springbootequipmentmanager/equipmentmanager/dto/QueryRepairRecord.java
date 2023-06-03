@@ -9,7 +9,7 @@ import java.sql.Date;
 public class QueryRepairRecord {
     private Integer repId;
     private Integer euqId;
-    private Integer adminId;
+    private Integer admId;
     private String repReason;
     private String repPerson;
     private String repCost;

@@ -59,6 +59,9 @@ system:
   expireTime: 10800
 
 #配置日志打印
+logging:
+  level:
+    root: debug
 
 
 mybatis-plus:

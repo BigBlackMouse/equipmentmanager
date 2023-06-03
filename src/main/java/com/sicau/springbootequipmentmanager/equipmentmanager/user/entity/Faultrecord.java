@@ -1,11 +1,11 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.user.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.time.LocalDate;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -37,10 +37,10 @@ public class Faultrecord implements Serializable {
     private Integer userId;
 
     @TableField("fau_occurdate")
-    private LocalDate fauOccurdate;
+    private Date fauOccurDate;
 
     @TableField("fau_occurposition")
-    private String fauOccurposition;
+    private String fauOccurPosition;
 
     @TableField("fau_detail")
     private String fauDetail;
@@ -51,6 +51,7 @@ public class Faultrecord implements Serializable {
     @TableField("adm_answer")
     private String admAnswer;
 
+    @TableLogic
     @TableField("adm_del")
     private Integer admDel;
 

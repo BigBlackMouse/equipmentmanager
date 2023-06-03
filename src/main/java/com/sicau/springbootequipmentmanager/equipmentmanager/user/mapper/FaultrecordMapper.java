@@ -2,6 +2,7 @@ package com.sicau.springbootequipmentmanager.equipmentmanager.user.mapper;
 
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Faultrecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +14,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface FaultrecordMapper extends BaseMapper<Faultrecord> {
 
+
+    Integer adminLogicDeleteByFauId(@Param("fauId") Integer fauId);
+
+    Integer userLogicDeleteByFauId(Integer fauId);
 }

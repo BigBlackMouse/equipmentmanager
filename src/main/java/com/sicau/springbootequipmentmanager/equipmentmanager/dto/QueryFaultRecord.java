@@ -11,7 +11,7 @@ public class QueryFaultRecord {
     private Integer currentPage;
     private Integer pageSize;
     private Integer fauId;
-    private Integer adminId;
+    private Integer admId;
     private Integer equId;
     private Integer userId;
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -19,8 +19,8 @@ public class QueryFaultRecord {
     private Date fauOccurDate;
     private String fauOccurPosition;
     private String  fauDetail;
-    private String  adminAnswer;
+    private String  admAnswer;
     private String  adminDel;
     private String  userDel;
-    private String  adminMessage;
+    private String  admMessage;
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sicau.springbootequipmentmanager.equipmentmanager.user.mapper.ScrapMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.ScrapRecord">
+        <id column="scr_id" property="scrId" />
+        <result column="equ_id" property="equId" />
+        <result column="adm_id" property="admId" />
+        <result column="scr_reason" property="scrReason" />
+        <result column="scr_date" property="scrDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        scr_id, equ_id, adm_id, scr_reason, scr_date
+    </sql>
+
+</mapper>

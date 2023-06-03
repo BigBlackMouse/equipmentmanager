@@ -1,5 +1,9 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.user.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.FaultRecordInfo;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.QueryFaultRecord;
+import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Equipment;
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Faultrecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +17,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface FaultrecordService extends IService<Faultrecord> {
 
+    Page<Faultrecord> getFaultPage(QueryFaultRecord queryFaultRecord);
+
+    Boolean addFaultRecord(FaultRecordInfo faultRecordInfo);
+
+    Boolean deleteFaultRecordByFauId(Integer fauId, Integer admId, Integer userId);
+
+    Boolean updateFault(Faultrecord faultrecord);
 }
