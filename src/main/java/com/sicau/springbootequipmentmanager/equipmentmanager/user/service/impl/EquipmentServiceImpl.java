@@ -23,8 +23,8 @@ public class EquipmentServiceImpl extends ServiceImpl<EquipmentMapper, Equipment
     @Override
     public Page<Equipment> getEquipmentPage(QueryEquipment queryEquipment) {
         Page<Equipment> page = new Page<>();
-        page.setSize(queryEquipment.getPageSize());
-        page.setCurrent(queryEquipment.getCurrentPage());
+        page.setSize(queryEquipment.getPageSize() == null ? 10 : queryEquipment.getPageSize());
+        page.setCurrent(queryEquipment.getCurrentPage() == null ? 1 :queryEquipment.getCurrentPage());
         QueryWrapper<Equipment> wrapper = new QueryWrapper<>();
         return page(page,wrapper);
     }
