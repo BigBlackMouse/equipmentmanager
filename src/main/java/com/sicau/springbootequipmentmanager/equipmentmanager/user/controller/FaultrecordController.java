@@ -15,6 +15,7 @@ import com.sicau.springbootequipmentmanager.equipmentmanager.user.service.Faultr
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.service.RepairrecordService;
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.service.ScrapService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -80,16 +81,11 @@ public class FaultrecordController {
 
     /**
      * 删除故障信息
-     * @param fauId
-     * @param admId
-     * @param userId
      * @return
      */
     @DeleteMapping("/delete")
-    public Result<?> deleteFault(@RequestParam("fauId") Integer fauId,
-                                 @RequestParam(value = "admId",required = false) Integer admId,
-                                 @RequestParam(value = "userId",required = false) Integer userId){
-        Boolean status = faultrecordService.deleteFaultRecordByFauId(fauId, admId, userId);
+    public Result<?> deleteFault(Integer fauId){
+        Boolean status = faultrecordService.deleteFaultRecordByFauId(fauId);
         Result result = new Result();
         if(status){
             result.success(200,"删除成功！");
@@ -101,22 +97,12 @@ public class FaultrecordController {
 
     /**
      * 处理故障：1.回复用户
-     * @param admAnswer
-     * @param fauId
-     * @param admMessage
      * @return
      */
     @PutMapping("/resolve/reply")
-    public Result<?> resolveFaultByReply(@RequestParam("admAnswer")String admAnswer,
-                                         @RequestParam("fauId")Integer fauId,
-                                         @RequestParam(value = "admMessage",required = false)String admMessage){
-        // 转entity
-        Faultrecord faultrecord = new Faultrecord ();
-        faultrecord.setFauId(fauId);
-        faultrecord.setAdmAnswer(admAnswer);
-        faultrecord.setAdmMessage(admMessage);
+    public Result<?> resolveFaultByReply(FaultRecordInfo faultRecordInfo){
         // 处理
-        Boolean status = faultrecordService.updateFault(faultrecord);
+        Boolean status = faultrecordService.updateFault(faultRecordInfo);
         Result result = new Result();
         if(status){
             result.success(200,"回复成功！");

@@ -34,30 +34,11 @@ public class FaultrecordServiceImpl extends ServiceImpl<FaultrecordMapper, Fault
     @Override
     public Page<Faultrecord> getFaultPage(QueryFaultRecord queryFaultRecord) {
         Page<Faultrecord> page = new Page<>();
-        page.setSize(queryFaultRecord.getPageSize() == null ? 3 : queryFaultRecord.getPageSize());
-        page.setCurrent(queryFaultRecord.getCurrentPage() == null ? 1 :queryFaultRecord.getCurrentPage());
-        // 得到当前登录的执行查询的用户
-        Boolean isAdmin = true;
-        Integer executor = queryFaultRecord.getAdmId();
-        if(executor == null){
-            executor = queryFaultRecord.getUserId();
-            isAdmin = false;
-        }
-        if(executor == null){
-            throw new RuntimeException("没有登录用户");
-        }
-        // 返回查询结果
+        page.setSize(queryFaultRecord.getPageSize());
+        page.setCurrent(queryFaultRecord.getCurrentPage());
         QueryWrapper<Faultrecord> wrapper = new QueryWrapper<>();
-        if(isAdmin){
-            // 管理员返回所有
-            return page(page,wrapper);
-        }else{
-            // 普通用户返回由他提交的
-            wrapper.eq("user_id",executor);
-            // 用户级别的逻辑删除
-            wrapper.eq("user_del",0);
-            return page(page,wrapper);
-        }
+        return page(page,wrapper);
+
 
     }
 
@@ -69,30 +50,27 @@ public class FaultrecordServiceImpl extends ServiceImpl<FaultrecordMapper, Fault
         // TODO 图片上传
 
         // 新增故障信息
-        boolean status = this.save(faultrecord);
-        return status;
+        return this.save(faultrecord);
     }
 
     @Override
-    public Boolean deleteFaultRecordByFauId(@Param("fauId")Integer fauId,
-                                            @Param("admId")Integer admId,
-                                            @Param("userId")Integer userId) {
-        Integer count = 0;
-        // 判断由什么身份删除
-        if(admId != null){
-            return this.removeById(fauId);
-        }else{
-            count = faultrecordMapper.userLogicDeleteByFauId(fauId);
-        }
-        Boolean status = count != 0 ? true : false;
-        return status;
+    public Boolean deleteFaultRecordByFauId(@Param("fauId")Integer fauId) {
+        return this.removeById(fauId);
     }
 
     @Override
-    public Boolean updateFault(Faultrecord faultRecord) {
-        boolean status = this.updateById(faultRecord);
-        return status;
+    public Boolean updateFault(FaultRecordInfo faultRecordInfo) {
+        Faultrecord faultrecord = new Faultrecord();
+        BeanUtils.copyProperties(faultRecordInfo,faultrecord);
+        return this.updateById(faultrecord);
     }
 
+
+    @Override
+    public boolean getFaultRecordAdd(FaultRecordInfo faultRecordInfo) {
+        Faultrecord faultrecord = new Faultrecord();
+        BeanUtils.copyProperties(faultRecordInfo,faultrecord);
+        return this.save(faultrecord);
+    }
 
 }

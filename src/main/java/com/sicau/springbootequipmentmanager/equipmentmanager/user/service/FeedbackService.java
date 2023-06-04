@@ -22,5 +22,5 @@ public interface FeedbackService extends IService<Feedback> {
 
     Boolean addFeedback(FeedBackInfo feedBackInfo);
 
-    Boolean updateFeedback(Feedback feedback);
+    Boolean updateFeedback(FeedBackInfo feedBackInfo);
 }

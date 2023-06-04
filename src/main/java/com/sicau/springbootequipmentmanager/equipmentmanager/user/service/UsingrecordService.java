@@ -1,7 +1,10 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.user.service;
 
-import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Usingrecord;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.QueryUsingRecord;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.UsingrecordInfo;
+import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Usingrecord;
 
 /**
  * <p>
@@ -12,5 +15,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-06-02
  */
 public interface UsingrecordService extends IService<Usingrecord> {
-
+    boolean getEquipmentRent(UsingrecordInfo usingrecordInfo);
+    Page<Usingrecord> getUsingRecordPage(QueryUsingRecord queryUsingRecord);
+    Page<Usingrecord> getUsingRecordSearch(QueryUsingRecord queryUsingRecord);
+    boolean getUsingRecordDelete(Integer usiId);
 }

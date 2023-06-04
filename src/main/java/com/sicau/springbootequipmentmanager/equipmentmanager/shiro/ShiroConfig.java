@@ -36,7 +36,6 @@ public class ShiroConfig {
         factoryBean.setFilters(filter);
         HashMap<String , String > filterMap = new HashMap<>();
         filterMap.put("/api/user/login","anon");
-        filterMap.put("/api/equipment/page","anon");
         filterMap.put("/api/user/401","anon");
         filterMap.put("/**","jwt");
         factoryBean.setFilterChainDefinitionMap(filterMap);

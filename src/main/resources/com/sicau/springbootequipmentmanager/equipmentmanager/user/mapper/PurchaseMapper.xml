@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sicau.springbootequipmentmanager.equipmentmanager.user.mapper.PurchaseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Purchase">
+        <id column="pur_id" property="purId" />
+        <result column="user_id" property="userId" />
+        <result column="equ_name" property="equName" />
+        <result column="pur_applyreason" property="purApplyreason" />
+        <result column="pur_purchasenumber" property="purPurchasenumber" />
+        <result column="pur_price" property="purPrice" />
+        <result column="pur_applydate" property="purApplydate" />
+        <result column="adm_dealstatus" property="admDealstatus" />
+        <result column="adm_reply" property="admReply" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        pur_id, user_id, equ_name, pur_applyreason, pur_purchasenumber, pur_price, pur_applydate, adm_dealstatus, adm_reply
+    </sql>
+
+</mapper>

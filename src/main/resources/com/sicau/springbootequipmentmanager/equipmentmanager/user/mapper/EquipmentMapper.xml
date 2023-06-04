@@ -24,4 +24,9 @@
         equ_id, fac_id, equ_name, equ_type, equ_purchasedate, equ_purchaser, equ_singleprice, equ_unit, equ_spec, equ_total, equ_curr, equ_position, del
     </sql>
 
+    <select id="selectEquipment" resultType="com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Equipment">
+        select equ_type,COUNT(*) as 数量 from equipment
+        GROUP BY equ_type having 1=1
+    </select>
+
 </mapper>

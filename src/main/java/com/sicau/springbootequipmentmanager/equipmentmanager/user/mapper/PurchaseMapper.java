@@ -1,7 +1,7 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.user.mapper;
 
-import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Equipment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Purchase;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author 软件工程实训：2023/5/25
- * @since 2023-06-02
+ * @since 2023-06-04
  */
-public interface EquipmentMapper extends BaseMapper<Equipment> {
-    Equipment selectEquipment();
+public interface PurchaseMapper extends BaseMapper<Purchase> {
+
 }

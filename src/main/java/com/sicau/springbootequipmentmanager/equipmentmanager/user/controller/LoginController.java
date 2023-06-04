@@ -32,4 +32,5 @@ public class LoginController {
         object.put("user",user);
         return new Result<>().success().put(object);
     }
+
 }

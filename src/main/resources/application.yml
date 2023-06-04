@@ -8,7 +8,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/devicemanage?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
-    password: 2580
+    password: 123456
     druid:
       initial-size: 1
       min-idle: 3
@@ -59,9 +59,6 @@ system:
   expireTime: 10800
 
 #配置日志打印
-logging:
-  level:
-    root: debug
 
 
 mybatis-plus:
@@ -86,3 +83,6 @@ mybatis-plus:
     #驼峰下划线转换
     map-underscore-to-camel-case: true
     cache-enabled: false
+logging:
+  level:
+    root: debug

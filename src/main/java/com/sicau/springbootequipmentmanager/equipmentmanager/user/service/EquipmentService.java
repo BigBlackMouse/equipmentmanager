@@ -16,4 +16,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EquipmentService extends IService<Equipment> {
     Page<Equipment> getEquipmentPage(QueryEquipment queryEquipment);
+    Page<Equipment> getEquipmentSearch(QueryEquipment queryEquipment);
+    boolean getEquipmentAdd(EquipmentInfo equipmentInfo);
+    Page<Equipment> getEquipmentType(QueryEquipment queryEquipment);
+
+
 }

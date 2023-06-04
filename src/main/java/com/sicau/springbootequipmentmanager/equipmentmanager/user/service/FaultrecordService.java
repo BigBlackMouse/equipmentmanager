@@ -21,7 +21,10 @@ public interface FaultrecordService extends IService<Faultrecord> {
 
     Boolean addFaultRecord(FaultRecordInfo faultRecordInfo);
 
-    Boolean deleteFaultRecordByFauId(Integer fauId, Integer admId, Integer userId);
+    Boolean deleteFaultRecordByFauId(Integer fauId);
 
-    Boolean updateFault(Faultrecord faultrecord);
+    Boolean updateFault(FaultRecordInfo faultRecordInfo);
+
+    boolean getFaultRecordAdd(FaultRecordInfo faultRecordInfo);
+
 }

@@ -1,18 +1,17 @@
 package com.sicau.springbootequipmentmanager.equipmentmanager.user.controller;
 
 
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sicau.springbootequipmentmanager.equipmentmanager.common.result.PageResult;
 import com.sicau.springbootequipmentmanager.equipmentmanager.common.result.Result;
+import com.sicau.springbootequipmentmanager.equipmentmanager.dto.EquipmentInfo;
 import com.sicau.springbootequipmentmanager.equipmentmanager.dto.QueryEquipment;
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.entity.Equipment;
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.service.EquipmentService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -35,5 +34,30 @@ public class EquipmentController {
         result.setMsg("操作成功");
         return result;
     }
+    @GetMapping("/search")
+    public PageResult<?> getEquipmentSearch(QueryEquipment queryEquipment){
+        Page<Equipment> page = equipmentService.getEquipmentSearch(queryEquipment);
+        PageResult<Equipment> result = new PageResult<>(page.getCurrent(),page.getSize(),page.getTotal(),page.getPages(),page.getRecords());
+        result.setCode(200);
+        result.setMsg("操作成功");
+        return result;
+    }
+    @PostMapping("/add")
+    public Result<?> getEquipmentAdd(@RequestBody EquipmentInfo equipmentInfo){
+        boolean result = equipmentService.getEquipmentAdd(equipmentInfo);
+        if (result) {
+            return new Result<>().success().put(result);
+        }else {
+            return new Result<>().error();
+        }
+    }
 
+    @GetMapping("/type")
+    public PageResult<?> getEquipment(QueryEquipment queryEquipment){
+        Page<Equipment> page = equipmentService.getEquipmentType(queryEquipment);
+        PageResult<Equipment> result = new PageResult<>(page.getCurrent(),page.getSize(),page.getTotal(),page.getPages(),page.getRecords());
+        result.setCode(200);
+        result.setMsg("操作成功");
+        return result;
+    }
 }

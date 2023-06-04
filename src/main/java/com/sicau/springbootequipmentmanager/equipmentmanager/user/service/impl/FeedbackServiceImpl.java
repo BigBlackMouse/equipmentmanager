@@ -28,8 +28,8 @@ public class FeedbackServiceImpl extends ServiceImpl<FeedbackMapper, Feedback> i
     @Override
     public Page<Feedback> getFeedbackPage(QueryFeedBack queryFeedBack) {
         Page<Feedback> page = new Page<>();
-        page.setSize(queryFeedBack.getPageSize() == null ? 3 : queryFeedBack.getPageSize());
-        page.setCurrent(queryFeedBack.getCurrentPage() == null ? 1 :queryFeedBack.getCurrentPage());
+        page.setSize(queryFeedBack.getPageSize());
+        page.setCurrent(queryFeedBack.getCurrentPage());
         // TODO 校验当前用户是否为管理员
 
         // 返回查询结果
@@ -39,9 +39,8 @@ public class FeedbackServiceImpl extends ServiceImpl<FeedbackMapper, Feedback> i
     }
 
     @Override
-    public Boolean deleteFeedbackByFeeId(@Param("fauId") Integer feeId) {
-        boolean status = this.removeById(feeId);
-        return status;
+    public Boolean deleteFeedbackByFeeId(Integer feeId) {
+        return this.removeById(feeId);
     }
 
     @Override
@@ -53,8 +52,10 @@ public class FeedbackServiceImpl extends ServiceImpl<FeedbackMapper, Feedback> i
     }
 
     @Override
-    public Boolean updateFeedback(Feedback feedback) {
-        boolean status = this.updateById(feedback);
-        return status;
+    public Boolean updateFeedback(FeedBackInfo feedBackInfo) {
+        Feedback feedback = new Feedback();
+        BeanUtils.copyProperties(feedBackInfo,feedback);
+        return this.updateById(feedback);
     }
+
 }
