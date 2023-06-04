@@ -46,15 +46,17 @@ public class FaultrecordServiceImpl extends ServiceImpl<FaultrecordMapper, Fault
     public Boolean addFaultRecord(FaultRecordInfo faultRecordInfo) {
         Faultrecord faultrecord = new Faultrecord();
         BeanUtils.copyProperties(faultRecordInfo, faultrecord);
-
-        // TODO 图片上传
-
-        // 新增故障信息
         return this.save(faultrecord);
     }
 
     @Override
-    public Boolean deleteFaultRecordByFauId(@Param("fauId")Integer fauId) {
+    public Boolean deleteFaultRecordByFauId(@Param("fauId")Integer fauId,
+                                            @Param("userId")Integer userId) {
+        // 用户级别逻辑删除
+        if (userId != null){
+            Integer count = faultrecordMapper.userLogicDeleteByFauId(fauId);
+            return count > 0 ? true : false;
+        }
         return this.removeById(fauId);
     }
 

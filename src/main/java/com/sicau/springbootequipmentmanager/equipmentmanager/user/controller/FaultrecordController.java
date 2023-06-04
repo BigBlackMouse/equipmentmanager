@@ -96,9 +96,9 @@ public class FaultrecordController {
             String newFileName =  new SimpleDateFormat("yyyymmddHHmmss").format(new Date())+ UUID.randomUUID().toString().replace("-","") + extension;
             // 存对象
             String imgdir = "img";
-            faultRecordInfo.setFauImg(newFileName + imgdir);
+            faultRecordInfo.setFauImg(imgdir + "/" + newFileName);
             // 生成目录
-            String localContainer = "/static/"+imgdir;
+            String localContainer = "/static/" + imgdir;
             String uploadPath = ResourceUtils.getURL("classpath:").getPath() + localContainer;
             File dirPath = new File(uploadPath);
             if (!dirPath.exists()) {
@@ -162,8 +162,8 @@ public class FaultrecordController {
      * @return
      */
     @DeleteMapping("/delete")
-    public Result<?> deleteFault(Integer fauId){
-        Boolean status = faultrecordService.deleteFaultRecordByFauId(fauId);
+    public Result<?> deleteFault(Integer fauId, Integer userId){
+        Boolean status = faultrecordService.deleteFaultRecordByFauId(fauId, userId);
         Result result = new Result();
         if(status){
             result.success(200,"删除成功！");
