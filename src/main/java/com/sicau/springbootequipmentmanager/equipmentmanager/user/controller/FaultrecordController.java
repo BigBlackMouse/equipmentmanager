@@ -15,10 +15,24 @@ import com.sicau.springbootequipmentmanager.equipmentmanager.user.service.Faultr
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.service.RepairrecordService;
 import com.sicau.springbootequipmentmanager.equipmentmanager.user.service.ScrapService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * <p>
@@ -67,15 +81,79 @@ public class FaultrecordController {
      * @return
      */
     @PostMapping("/add")
-    public Result<?> addFault(@RequestBody FaultRecordInfo faultRecordInfo){
-        Boolean status = faultrecordService.addFaultRecord(faultRecordInfo);
+    public Result<?> addFault(FaultRecordInfo faultRecordInfo,
+                              @RequestParam("file") MultipartFile file){
         Result result = new Result();
+        try {
+            // 获取文件的后缀
+            String extension = "." + FilenameUtils.getExtension(file.getOriginalFilename());
+            // 获取文件的类型
+            String type = file.getContentType();
+            if(!type.startsWith("image")){
+                return result.error(400, "只能上传图片！");
+            }
+            // 新文件名
+            String newFileName =  new SimpleDateFormat("yyyymmddHHmmss").format(new Date())+ UUID.randomUUID().toString().replace("-","") + extension;
+            // 存对象
+            String imgdir = "img";
+            faultRecordInfo.setFauImg(newFileName + imgdir);
+            // 生成目录
+            String localContainer = "/static/"+imgdir;
+            String uploadPath = ResourceUtils.getURL("classpath:").getPath() + localContainer;
+            File dirPath = new File(uploadPath);
+            if (!dirPath.exists()) {
+                dirPath.mkdirs();
+            }
+            // 处理文件上传
+            file.transferTo(new File(dirPath, newFileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // 存数据库
+        Boolean status = faultrecordService.addFaultRecord(faultRecordInfo);
         if(status){
             result.success(200,"添加成功！");
         }else {
             result.error(400, "添加异常");
         }
         return result;
+    }
+
+    @PostMapping("upload")
+    public Map<String, String> uploadFile(@RequestParam("file") MultipartFile file) {
+
+        Map<String, String> res = new HashMap<>();
+        try {
+            String fileN = file.getOriginalFilename();
+            // 获取文件的原始名称
+            String fileName = file.getOriginalFilename();
+            // 获取文件的后缀
+            String extension = "."+FilenameUtils.getExtension(file.getOriginalFilename());
+            // 获取文件的类型
+            String type = file.getContentType();
+            // 新文件名
+            String newFileName =  new SimpleDateFormat("yyyymmddHHmmss").format(new Date())+ UUID.randomUUID().toString().replace("-","") + extension;
+            // 生成目录
+            String localContainer = "/static/img";
+            String uploadPath = ResourceUtils.getURL("classpath:").getPath() + localContainer;
+            File dirPath = new File(uploadPath);
+            if (!dirPath.exists()) {
+                dirPath.mkdirs();
+            }
+            // 处理文件上传
+            file.transferTo(new File(dirPath, newFileName));
+
+            res.put("code", "0");
+            res.put("msg", "上传成功");
+            res.put("url", "/fileStorage/file/index");
+        } catch (IOException e) {
+            e.printStackTrace();
+            res.put("code", "-1");
+            res.put("msg", "上传失败");
+            res.put("url", "/fileStorage/file/index");
+        }
+
+        return res;
     }
 
 
